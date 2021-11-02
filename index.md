@@ -2,12 +2,16 @@
 ## Welcome to my homepage! I Miss you
 
 [Institute of Nature Science](https://ins.sjtu.edu.cn/)
+
 [School of Mathematical Science](https://math.sjtu.edu.cn/)
+
 [Shanghai Jiao Tong University](https://www.sjtu.edu.cn/)
 
 ## Contact me
 zhangyucan@sjtu.edu.cn
+
 188****0991
+
 to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
