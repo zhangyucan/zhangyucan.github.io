@@ -1,7 +1,14 @@
 ## 当你打开这个页面，即意味着我是你爹
-## Welcome to GitHub Pages
+## Welcome to my homepage! I Miss you
 
-You can use the [editor on GitHub](https://github.com/zhangyucan/zhangyucan.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+[Institute of Nature Science](https://ins.sjtu.edu.cn/)
+[School of Mathematical Science](https://math.sjtu.edu.cn/)
+[Shanghai Jiao Tong University](https://www.sjtu.edu.cn/)
+
+## Contact me
+zhangyucan@sjtu.edu.cn
+188****0991
+to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
