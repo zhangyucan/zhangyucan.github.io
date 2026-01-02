@@ -1,6 +1,6 @@
 ---
 layout: page
-title: My Blog
+title: Blog
 permalink: /blog/
 ---
 这是我的博客，根据内容性质划分为 2 篇 6 个主要栏目：
