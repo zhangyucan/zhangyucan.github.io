@@ -193,7 +193,7 @@ permalink: /blog/
 
 <details open> <summary>
     <div class="category-header">
-      <span class="category-title">4. 山水如画 (默认展开演示)</span>
+      <span class="category-title">4. 山水如画</span>
       <span class="post-count">{{ site.categories['山水如画'].size | default: 0 }} 篇</span>
     </div>
     <ul class="preview-list">
