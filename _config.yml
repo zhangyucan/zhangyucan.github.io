@@ -6,6 +6,7 @@ email: zhangyucan@sjtu.edu.cn
 github_username: zhangyucan
 
 # 启用官方默认主题，最省心
+# theme: minima
 theme: jekyll-theme-architect
 
 # 顶部导航栏设置
