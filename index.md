@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: About Me
 ---
 
@@ -17,7 +17,7 @@ I am also an active investor in the US and HK stock markets, focusing on the int
 
 ## Related links
 
-[Institute of Nature Science](https://ins.sjtu.edu.cn/)
+[Institute of Natural Science](https://ins.sjtu.edu.cn/)
 
 [School of Mathematical Science](https://math.sjtu.edu.cn/)
 

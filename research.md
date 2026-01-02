@@ -5,9 +5,15 @@ permalink: /research/
 ---
 ### Publications
 
-1. **Yucan Zhang**, Co-author A, Co-author B. "A Novel Deep Learning Framework for Enzyme Reaction Prediction." *Journal of Chemical Information and Modeling*, 2024. [PDF](#)
-2. **Yucan Zhang**, Supervisor X. "High-Frequency Trading Signals in Emerging Markets." *Quantitative Finance Letters*, 2023. [PDF](#)
+1. **Yucan Zhang**, Muyu Wu. "Combined measurement of serum zinc with PSA ameliorates prostate cancer screening efficiency via support vector machine algorithms" *Heliyon*, 2024. [PDF](#)
+
+### 专利
+
+1. 发明专利： 一种前列腺健康指数的评估模型及其构建方法、评估方法
+2. 发明专利： 多囊卵巢综合征预测方法及系统
+3. 发明专利： 一种中国儿童身高预测模型系统
 
 ### Preprints
 
-- **Yucan Zhang**. "Generative Models for Protein Design: A Review." *arXiv preprint*, 2025.
+- **Yucan Zhang**, Jiayi Lu. "Assessment of Facial Morphologic Features in Patients With Polycystic Ovary Syndrome Using Deep Learning: A Multi-center Cross-sectional Study", *arXiv preprint*, 2025.
+- **Yucan Zhang**, Yiqing Shen. "A Multi-Agent Framework for Automated Protein Design Using Large Language Models", *arXiv preprint*, 2024.
