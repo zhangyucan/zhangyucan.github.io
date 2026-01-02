@@ -23,6 +23,4 @@ I am also an active investor in the US and HK stock markets, focusing on the int
 
 [Shanghai Jiao Tong University](https://www.sjtu.edu.cn/)
 
-## Contact me
-zhangyucan@sjtu.edu.cn
 
