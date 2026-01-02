@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Academic Papers
 permalink: /research/
 ---
