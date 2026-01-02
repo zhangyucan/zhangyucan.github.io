@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About Me
+title: About
 ---
 
 ## Hello, I'm Yucan Zhang (张玉灿)
