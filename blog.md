@@ -3,6 +3,14 @@ layout: page
 title: Blog
 permalink: /blog/
 ---
+<style>
+  blockquote {
+    font-size: 16px !important;
+    font-style: normal;
+    color: #555;
+  }
+</style>
+
 这是我的博客，根据内容性质划分为 2 篇 6 个主要栏目：
 
 ---
