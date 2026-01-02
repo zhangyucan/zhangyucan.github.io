@@ -122,8 +122,6 @@ permalink: /blog/
   .date { float: right; font-size: 0.85em; color: #999; }
 </style>
 
-这是我的博客，默认展示各栏目 **最新 3 篇预览**。点击栏目即可切换至 **完整模式**。
-
 ---
 
 ### 鲲鹏之志篇
@@ -143,7 +141,7 @@ permalink: /blog/
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
       {% endfor %}
       {% if site.categories['指挥部署'].size > 0 %}
-        <div class="preview-tips">... 点击展开查看完整列表及简介</div>
+        <div class="preview-tips">... </div>
       {% endif %}
     </div>
   </summary>
@@ -180,7 +178,7 @@ permalink: /blog/
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
       {% endfor %}
       {% if site.categories['奇技淫巧'].size > 0 %}
-        <div class="preview-tips">... 点击展开查看完整列表及简介</div>
+        <div class="preview-tips">... </div>
       {% endif %}
     </div>
   </summary>
@@ -215,7 +213,7 @@ permalink: /blog/
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
       {% endfor %}
       {% if site.categories['念两句诗'].size > 0 %}
-        <div class="preview-tips">... 点击展开查看完整列表及简介</div>
+        <div class="preview-tips">... </div>
       {% endif %}
     </div>
   </summary>
@@ -254,7 +252,7 @@ permalink: /blog/
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
       {% endfor %}
       {% if site.categories['山水如画'].size > 0 %}
-        <div class="preview-tips">... 点击展开查看完整列表及简介</div>
+        <div class="preview-tips">... </div>
       {% endif %}
     </div>
   </summary>
@@ -289,7 +287,7 @@ permalink: /blog/
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
       {% endfor %}
       {% if site.categories['弄俩钱花'].size > 0 %}
-        <div class="preview-tips">... 点击展开查看完整列表及简介</div>
+        <div class="preview-tips">... </div>
       {% endif %}
     </div>
   </summary>
@@ -324,7 +322,7 @@ permalink: /blog/
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
       {% endfor %}
       {% if site.categories['打猫踹狗'].size > 0 %}
-        <div class="preview-tips">... 点击展开查看完整列表及简介</div>
+        <div class="preview-tips">... </div>
       {% endif %}
     </div>
   </summary>
