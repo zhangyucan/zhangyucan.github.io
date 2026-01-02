@@ -8,12 +8,12 @@ title: About Me
 I am currently a Ph.D. candidate at the **School of Mathematical Sciences, Shanghai Jiao Tong University**.
 
 My research interests include:
-- **AI for Science**: Protein structure prediction, Enzyme modeling.
-- **Quantitative Finance**: Market microstructure, High-frequency trading strategies.
+- **AI for Science**: Protein-ligand reaction prediction, protein design.
+- **Image Processing**: Image recognition, reconstruction and segmentation.
 
 I am also an active investor in the US and HK stock markets, focusing on the intersection of **Macroeconomics** and **Technology trends**.
 
-[View My Research](./research) | [Read My Financial Analysis](./finance)
+[View My Research](./research) | [Read My Blog](./blog)
 
 ## Related links
 
@@ -25,7 +25,4 @@ I am also an active investor in the US and HK stock markets, focusing on the int
 
 ## Contact me
 zhangyucan@sjtu.edu.cn
-
-+86 18817600991
-
 
