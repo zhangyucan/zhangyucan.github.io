@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Research
+title: Academic
 permalink: /research/
 ---
 ### 论文 Publications
