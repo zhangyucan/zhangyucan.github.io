@@ -1,1 +1,20 @@
+title: Yucan Zhang's Home
+description: Ph.D. Candidate @ SJTU | AI for Science | Image Progress | Deep Learning
+author: Zhang Yucan
+email: zhangyucan@sjtu.edu.cn
+# 你的GitHub用户名
+github_username: zhangyucan
 
+# 启用官方默认主题，最省心
+theme: minima
+
+# 顶部导航栏设置
+header_pages:
+  - index.md        # 首页（个人简介）
+  - research.md     # 学术论文页
+  - finance.md      # 财经分析页（实际上是博客列表）
+
+# 插件设置（支持数学公式，方便你写量化公式）
+plugins:
+  - jekyll-seo-tag
+markdown: kramdown
