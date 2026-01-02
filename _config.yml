@@ -7,7 +7,7 @@ github_username: zhangyucan
 
 # 启用官方默认主题，最省心
 # theme: minima
-theme: jekyll-theme-tactile
+theme: pages-themes/architect
 
 # 顶部导航栏设置
 header_pages:
@@ -17,6 +17,7 @@ header_pages:
 
 # 插件设置（支持数学公式，方便你写量化公式）
 plugins:
+  - jekyll-remote-theme
   - jekyll-seo-tag
 
 markdown: kramdown
