@@ -1,69 +1,83 @@
----
-layout: default
----
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私密笔记 (GitHub Safe)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;}
+        button { width: 100%; padding: 10px; background: #2ea44f; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;}
+        button:hover { background: #2c974b; }
+        #content { margin-top: 20px; padding: 15px; background: #fff9c4; border: 1px solid #fbc02d; display: none; word-wrap: break-word;}
+        .error { color: red; font-size: 12px; display: none; margin-top: 5px;}
+    </style>
+</head>
+<body>
 
-<div class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-meta">{{ page.date | date: "%Y-%m-%d" }}</p>
-  </header>
+<div class="card">
+    <h2 style="text-align:center">🔐 受限访问</h2>
+    
+    <label>请输入访问密钥 (16位):</label>
+    <input type="password" id="userKey" placeholder="在此输入密钥...">
+    <div id="errorMsg" class="error">解密失败：密钥错误或数据损坏</div>
 
-  <article class="post-content">
-    <div id="lock-screen" style="text-align: center; padding: 40px 0; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee;">
-      <div style="font-size: 3em; margin-bottom: 20px;">🔒</div>
-      <p style="color: #666;">此文章内容已加密，请输入密码查看。</p>
-      
-      <div style="margin-top: 20px;">
-        <input type="password" id="password-input" placeholder="输入密码" 
-               style="padding: 10px; border: 1px solid #ddd; border-radius: 4px; width: 200px;">
-        <button onclick="decryptContent()" 
-                style="padding: 10px 20px; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
-          解锁
-        </button>
-      </div>
-      <p id="error-msg" style="color: red; margin-top: 10px; display: none;">密码错误，解密失败</p>
-    </div>
+    <button onclick="unlock()">查看内容</button>
 
-    <div id="decoded-content" style="display: none; margin-top: 30px;"></div>
-  </article>
-</div>
+    <input type="hidden" id="ciphertext" value="在此处放入你的Base64密文">
 
-<div id="ciphertext" style="display: none;">
-  {{ content | strip_newlines }}
+    <input type="hidden" id="iv" value="00000000000000000000000000000000">
+
+    <div id="content"></div>
 </div>
 
 <script>
-  function decryptContent() {
-    var password = document.getElementById("password-input").value;
-    var encryptedText = document.getElementById("ciphertext").innerText.trim();
-    var errorMsg = document.getElementById("error-msg");
+    function unlock() {
+        var inputKey = document.getElementById('userKey').value;
+        var ciphertext = document.getElementById('ciphertext').value; // 或者从外部文件加载
+        var ivHex = document.getElementById('iv').value;
+        var contentDiv = document.getElementById('content');
+        var errorDiv = document.getElementById('errorMsg');
 
-    try {
-      // 尝试使用 AES 解密
-      var bytes = CryptoJS.AES.decrypt(encryptedText, password);
-      var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        // 清空状态
+        contentDiv.style.display = 'none';
+        errorDiv.style.display = 'none';
 
-      if (originalText) {
-        // 解密成功
-        document.getElementById("lock-screen").style.display = "none";
-        document.getElementById("decoded-content").style.display = "block";
-        document.getElementById("decoded-content").innerHTML = originalText;
-      } else {
-        // 密码错误（解密出空字符串）
-        throw new Error("Wrong Password");
-      }
-    } catch (e) {
-      // 密码错误
-      errorMsg.style.display = "block";
-      document.getElementById("password-input").value = "";
+        try {
+            if (inputKey.length !== 16) {
+                throw new Error("密钥长度必须为16字符");
+            }
+
+            // 使用用户输入的 Key
+            var key = CryptoJS.enc.Utf8.parse(inputKey);
+            var iv = CryptoJS.enc.Hex.parse(ivHex);
+
+            var decrypted = CryptoJS.AES.decrypt(ciphertext, key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+
+            var result = decrypted.toString(CryptoJS.enc.Utf8);
+
+            if (!result) {
+                throw new Error("Padding 校验失败");
+            }
+
+            // 解密成功，显示内容
+            contentDiv.innerHTML = result;
+            contentDiv.style.display = 'block';
+
+        } catch (e) {
+            console.error(e);
+            errorDiv.style.display = 'block';
+            // 为了安全，如果失败可以清空输入框
+            // document.getElementById('userKey').value = '';
+        }
     }
-  }
-
-  // 支持回车键提交
-  document.getElementById("password-input").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-      decryptContent();
-    }
-  });
 </script>
+
+</body>
+</html>
