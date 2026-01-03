@@ -3,53 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>受保护的页面</title>
+    <title>私密内容 - 受密码保护</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f0f2f5; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .login-box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 380px; text-align: center; }
-        h2 { margin-bottom: 1.5rem; color: #333; font-weight: 600; }
-        input[type="password"] { width: 100%; padding: 12px; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; outline: none; transition: border 0.2s; }
-        input[type="password"]:focus { border-color: #007bff; }
-        button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: 600; transition: background 0.2s; }
-        button:hover { background: #0056b3; }
-        .error { color: #dc3545; font-size: 14px; margin-top: 10px; display: none; }
-        #protected-content { display: none; margin-top: 20px; text-align: left; line-height: 1.6; color: #444; word-break: break-word; }
-        .hidden-data { display: none; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f9f9f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: #333; }
+        .container { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center; border: 1px solid #eaeaea; }
+        h2 { margin-top: 0; color: #444; font-weight: 600; font-size: 1.5rem; }
+        p { color: #666; font-size: 0.95rem; margin-bottom: 1.5rem; }
+        input[type="password"] { width: 100%; padding: 14px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 8px; font-size: 16px; outline: none; transition: all 0.2s; box-sizing: border-box; }
+        input[type="password"]:focus { border-color: #0070f3; background: #f8fbff; }
+        button { width: 100%; padding: 14px; background: #0070f3; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #0051a2; }
+        .error { color: #e00; font-size: 0.85rem; margin-top: 1rem; display: none; background: #fff0f0; padding: 10px; border-radius: 6px; }
+        #content { display: none; text-align: left; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee; line-height: 1.8; }
+        /* 简单的 Markdown 样式模拟 */
+        #content h1, #content h2 { margin-top: 0; }
+        #content code { background: #f3f3f3; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
     </style>
 </head>
 <body>
 
-<div class="login-box">
-    <div id="login-form">
-        <h2>🔒 请输入访问密钥</h2>
-        <input type="password" id="passwordInput" placeholder="输入 16 位密钥..." autofocus>
-        <button onclick="attemptUnlock()">解 锁</button>
-        <div id="errorMsg" class="error">密钥错误或数据损坏</div>
-    </div>
-
-    <div id="protected-content"></div>
+<div class="container" id="login-card">
+    <h2>🔒 受限访问</h2>
+    <p>此页面内容已加密，请输入密钥查看。</p>
+    
+    <input type="password" id="password" placeholder="请输入 16 位访问密钥" autofocus>
+    <button onclick="unlock()">解 锁</button>
+    
+    <div id="error-msg" class="error"></div>
 </div>
 
-<input type="hidden" id="iv-string" value="00000000000000000000000000000000">
+<div id="content" class="container" style="max-width: 800px; display: none;">
+    </div>
 
-<input type="hidden" id="ciphertext-base64" value="请在这里粘贴你的Base64密文">
+<input type="hidden" id="iv-config" value="00000000000000000000000000000000">
+
+<input type="hidden" id="ciphertext-config" value="请在这里粘贴加密工具生成的Base64密文">
+
 <script>
-    function attemptUnlock() {
-        const password = document.getElementById('passwordInput').value;
-        const ivString = document.getElementById('iv-string').value;
-        const ciphertext = document.getElementById('ciphertext-base64').value;
-        const errorMsg = document.getElementById('errorMsg');
-        const contentDiv = document.getElementById('protected-content');
-        const loginForm = document.getElementById('login-form');
+    function unlock() {
+        const password = document.getElementById('password').value;
+        const ivStr = document.getElementById('iv-config').value;
+        const ciphertext = document.getElementById('ciphertext-config').value.trim();
+        const errorEl = document.getElementById('error-msg');
+        const loginCard = document.getElementById('login-card');
+        const contentEl = document.getElementById('content');
 
-        // 重置状态
-        errorMsg.style.display = 'none';
+        errorEl.style.display = 'none';
+        errorEl.textContent = '';
+
+        if (!password) {
+            showError("请输入密钥");
+            return;
+        }
 
         try {
-            // 核心逻辑：方案 A (全部按 UTF-8 文本处理)
+            // 核心逻辑：Text 模式 (Utf8.parse)
+            // 即使 ivStr 是 32 个字符，CryptoJS 在 Text 模式下会按字符解析
+            // 并在 AES 内部自动处理块大小
             const key = CryptoJS.enc.Utf8.parse(password);
-            const iv = CryptoJS.enc.Utf8.parse(ivString); // 关键修正点！
+            const iv = CryptoJS.enc.Utf8.parse(ivStr);
 
             const decrypted = CryptoJS.AES.decrypt(ciphertext, key, {
                 iv: iv,
@@ -57,23 +70,23 @@
                 padding: CryptoJS.pad.Pkcs7
             });
 
-            const resultString = decrypted.toString(CryptoJS.enc.Utf8);
+            const result = decrypted.toString(CryptoJS.enc.Utf8);
 
-            // 验证解密结果
-            if (resultString.length > 0) {
-                // 成功！隐藏登录框，显示内容
-                loginForm.style.display = 'none';
-                contentDiv.innerHTML = resultString; // 支持 HTML 内容
-                contentDiv.style.display = 'block';
+            if (result && result.length > 0) {
+                // 解密成功
+                loginCard.style.display = 'none'; // 隐藏登录框
+                contentEl.innerHTML = result;     // 注入内容
+                contentEl.style.display = 'block'; // 显示内容框
             } else {
                 throw new Error("解密结果为空");
             }
 
         } catch (e) {
-            console.error("Decryption failed:", e);
-            errorMsg.style.display = 'block';
-            // 动画震动提示（可选）
-            document.querySelector('.login-box').animate([
+            console.error(e);
+            showError("密钥错误或密文损坏，解密失败。");
+            // 密码框震动效果
+            const input = document.getElementById('password');
+            input.animate([
                 { transform: 'translateX(0)' },
                 { transform: 'translateX(-5px)' },
                 { transform: 'translateX(5px)' },
@@ -82,9 +95,15 @@
         }
     }
 
-    // 支持回车键提交
-    document.getElementById('passwordInput').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') attemptUnlock();
+    function showError(msg) {
+        const el = document.getElementById('error-msg');
+        el.textContent = msg;
+        el.style.display = 'block';
+    }
+
+    // 回车键支持
+    document.getElementById('password').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') unlock();
     });
 </script>
 
