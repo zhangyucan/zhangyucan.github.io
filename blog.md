@@ -136,6 +136,7 @@ permalink: /blog/
       {% for post in site.categories['指挥部署'] limit:3 %}
         <div class="preview-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </div>
       {% else %}
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
@@ -173,6 +174,7 @@ permalink: /blog/
       {% for post in site.categories['奇技淫巧'] limit:3 %}
         <div class="preview-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </div>
       {% else %}
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
@@ -208,6 +210,7 @@ permalink: /blog/
       {% for post in site.categories['念两句诗'] limit:3 %}
         <div class="preview-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </div>
       {% else %}
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
@@ -247,6 +250,7 @@ permalink: /blog/
       {% for post in site.categories['山水如画'] limit:3 %}
         <div class="preview-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </div>
       {% else %}
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
@@ -282,6 +286,7 @@ permalink: /blog/
       {% for post in site.categories['弄俩钱花'] limit:3 %}
         <div class="preview-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </div>
       {% else %}
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
@@ -317,6 +322,7 @@ permalink: /blog/
       {% for post in site.categories['打猫踹狗'] limit:3 %}
         <div class="preview-item">
           <a href="{{ post.url }}">{{ post.title }}</a>
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
         </div>
       {% else %}
         <div class="preview-item" style="color:#ccc;">(暂无文章)</div>
